@@ -140,8 +140,8 @@ function draw() {
     rect(250, height-150, 250, 300)
     stroke(0); fill(0); strokeWeight(2);
     text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
-    text("Thrown Velocity: ", 200, height-200, 125, 50); stroke('black'); line(270, height-200, 350, height-200); noStroke();
-    text("Final Velocity: ", 200, height-112.5, 125, 50); stroke(0, 255, 0); line(270, height-112.5, 350, height-112.5); noStroke();
+    text("Thrown Velocity: ", 200, height-200, 125, 50); stroke(0, 255, 0); line(270, height-200, 350, height-200); noStroke();
+    text("Final Velocity: ", 200, height-112.5, 125, 50); stroke(0, 0, 0); line(270, height-112.5, 350, height-112.5); noStroke();
     text("Cut the brown string to release the ball!", 250, height-35, 250, 100); noStroke(); line(270, height-112.5, 350, height-112.5);
     omega_vec = createVector(0, 0, -omega);
     drawCrosshair0();
