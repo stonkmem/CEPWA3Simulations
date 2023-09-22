@@ -70,7 +70,42 @@ class CoriolisSeeder {
         this.freezeLoc = createVector(this.s.x, this.s.y);
     }
 
-    displayProjected() {
+    displayProjected() {   
+        stroke(125);
+        this.s_copy = createVector(this.s.x, this.s.y);
+        this.s_copy.x+=15;
+        this.s_copy.y+=15;
+        line(this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y, this.rot_prime(this.s_copy).x, this.rot_prime(this.s_copy).y);
+
+        // fill(125); stroke(125);// push();// applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y);// line(0, 0, this.v_f.x, this.v_f.y);// pop();
+
+        stroke(125);
+        line(width/2 + this.rot_freezeTheta(this.s).x, height/2 + this.rot_freezeTheta(this.s).y, width/2 + this.rot_freezeTheta(this.freezeLoc).x, height/2 + this.rot_freezeTheta(this.freezeLoc).y);
+
+        push();
+        applyMatrix(cos(this.freezeTheta), sin(this.freezeTheta), -sin(this.freezeTheta), cos(this.freezeTheta), this.rot_freezeTheta(this.freezeLoc).x + width/2, this.rot_freezeTheta(this.freezeLoc).y + height/2);
+        stroke(125);fill(125);
+        line(0, 0, this.v_f.x, this.v_f.y);
+        applyMatrix(this.v_f_hat.x, this.v_f_hat.y, -this.v_f_hat.y, this.v_f_hat.x, this.v_f.x, this.v_f.y);
+        triangle(0,5,5*2,0,0,-1*5);
+        pop();
+
+        // push();
+        // applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), width/2, height/2);
+        // stroke(200, 200, 200, 0.5);fill(200, 200, 200, 0.5);
+        // circle(this.s.x, this.s.y, 15);
+        // pop();
+
+
+        if(dist(this.s.x, this.s.y, 0, 0)<height/2-110){
+            if(frameCount%2===0){
+                pointArr.push(new pointSeed(width/2 + this.s.x * cos(this.freezeTheta) - this.s.y * sin(this.freezeTheta), height/2 + this.s.x * sin(this.freezeTheta) + this.s.y * cos(this.freezeTheta), theta, (200, 200, 200)));
+                console.log('Ja');
+            }
+        }
+        for (let i = 0; i < pointArr.length; i += 1) {
+            pointArr[i].displayRot();
+        }
         push();
         applyMatrix(cos(this.freezeTheta), sin(this.freezeTheta), -sin(this.freezeTheta), cos(this.freezeTheta), width/2, height/2);
         strokeWeight(2);
@@ -84,51 +119,6 @@ class CoriolisSeeder {
         circle(this.s.x, this.s.y, 15); //ACTUAL BALL
         stroke(125);
         pop();
-        
-        stroke(125);
-        line(this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y, this.rot_prime(this.s).x, this.rot_prime(this.s).y);
-
-        fill(125); stroke(125);
-        push();
-        applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y);
-        
-        line(0, 0, this.v_f.x, this.v_f.y);
-        pop();
-
-        stroke(125);
-        line(width/2 + this.rot_freezeTheta(this.s).x, height/2 + this.rot_freezeTheta(this.s).y, width/2 + this.rot_freezeTheta(this.freezeLoc).x, height/2 + this.rot_freezeTheta(this.freezeLoc).y);
-
-        push();
-        applyMatrix(cos(this.freezeTheta), sin(this.freezeTheta), -sin(this.freezeTheta), cos(this.freezeTheta), this.rot_freezeTheta(this.freezeLoc).x + width/2, this.rot_freezeTheta(this.freezeLoc).y + height/2);
-        stroke(125);fill(125);
-        line(0, 0, this.v_f.x, this.v_f.y);
-        applyMatrix(this.v_f_hat.x, this.v_f_hat.y, -this.v_f_hat.y, this.v_f_hat.x, this.v_f.x, this.v_f.y);
-        triangle(0,5,5*2,0,0,-1*5);
-        pop();
-
-        push();
-        applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), width/2, height/2);
-        stroke(200, 200, 200, 0.5);fill(200, 200, 200, 0.5);
-        circle(this.s.x, this.s.y, 15);
-        pop();
-
-
-        if(dist(this.s.x, this.s.y, 0, 0)<height/2-110){
-            if(frameCount%2===0){
-                pointArr.push(new pointSeed(width/2 + this.s.x * cos(this.freezeTheta) - this.s.y * sin(this.freezeTheta), height/2 + this.s.x * sin(this.freezeTheta) + this.s.y * cos(this.freezeTheta), theta, (200, 200, 200)));
-            }
-        }
-        else{
-            push();
-            applyMatrix(cos(this.freezeTheta), sin(this.freezeTheta), -sin(this.freezeTheta), cos(this.freezeTheta), width/2, height/2);
-            strokeWeight(2);
-            fill(0); stroke(0);
-            circle(this.s.x, this.s.y, 15); //ACTUAL BALL
-            pop();
-        }
-        for (let i = 0; i < pointArr.length; i += 1) {
-            pointArr[i].displayRot();
-        }
     }
     get s() {
         return this._s;
