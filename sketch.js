@@ -6,6 +6,8 @@ let projectButton_1;
 let Projected = false;
 let coriolisPoint;
 let omega_vec;
+let menu_1;
+let menu_2
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight - 1);
@@ -23,6 +25,8 @@ function setup() {
 
   projectButton_1 = new Button(250, height / 2, 150, 100);
   stateButton_1 = new Button(width-250, height / 2, 200, 100);
+  menuButton_1 = new Button(250, height-275, 250, 50);
+  menuButton_2 = new Button(width-250, height-275, 250, 50);
 }
 
 function rot(a, b) {
@@ -48,6 +52,12 @@ function mouseClicked() {
   }
   if (stateButton_1.clicked()){
     setState();
+  }
+  if (menuButton_1.clicked()){
+    menu_1 = !menu_1;
+  }
+  if (menuButton_2.clicked()){
+    menu_2 = !menu_2;
   }
 }
 
@@ -102,14 +112,21 @@ function draw() {
       pointArr[i].displayVelVec();
     }
     stroke(255);
-    //LEGEND
-    fill(255);stroke(255);
-    rect(250, height-150, 250, 300)
-    stroke(0); fill(0); strokeWeight(2);
-    text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
-    text("Tangential Velocity: ", 200, height-200, 125, 50); stroke('blue'); line(270, height-200, 350, height-200); noStroke();
-    text("Centripetal Acceleration: ", 200, height-100, 125, 75); stroke('red'); line(270, height-112.5, 350, height-112.5); noStroke();
-    text("Click anywhere on the circle to begin!", 250, height-35, 250, 100); noStroke(); line(270, height-112.5, 350, height-112.5);
+    //LEGEND + HELP
+    if(pointArr.length==0){textSize(24);fill(0); noStroke(); text("Click anywhere on the circle to begin!", width/2, height/2+50, 600, 100);}
+    fill(255);stroke(255);textSize(20);
+    if(!menu_1){
+      rect(250, height-275, 250, 50);
+      stroke(0); fill(0); strokeWeight(2);
+      text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);
+    }
+    else{
+      rect(250, height-150, 250, 300);
+      stroke(0); fill(0); strokeWeight(2);
+      text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);
+      text("Tangential Velocity: ", 200, height-200, 125, 50); stroke('blue'); line(270, height-200, 350, height-200); noStroke();
+      text("Centripetal Acceleration: ", 200, height-100, 125, 75); stroke('red'); line(270, height-112.5, 350, height-112.5); noStroke();
+    }
     drawCrosshair0();
   }
   if (state === 1) {
@@ -137,13 +154,36 @@ function draw() {
     }
     //LEGEND
     fill(255);stroke(255);
-    rect(250, height-150, 250, 300)
-    stroke(0); fill(0); strokeWeight(2);
-    text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
-    text("Thrown Velocity: ", 200, height-200, 125, 50); stroke(0, 255, 0); line(270, height-200, 350, height-200); noStroke();
-    text("Final Velocity: ", 200, height-112.5, 125, 50); stroke(0, 0, 0); line(270, height-112.5, 350, height-112.5); noStroke();
-    text("Cut the brown string to release the ball!", 250, height-35, 250, 100); noStroke(); line(270, height-112.5, 350, height-112.5);
-    omega_vec = createVector(0, 0, -omega);
+    if(!menu_1){
+      rect(250, height-275, 250, 50);
+      stroke(0); fill(0); strokeWeight(2);
+      text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);
+    }
+    else{
+      rect(250, height-150, 250, 300);
+      stroke(0); fill(0); strokeWeight(2);
+      text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
+      text("Thrown Velocity: ", 200, height-200, 125, 50); stroke(150, 255, 150); line(270, height-200, 350, height-200); noStroke();
+      text("Final Velocity: ", 200, height-112.5, 125, 50); stroke(0, 0, 0); line(270, height-112.5, 350, height-112.5); noStroke();
+      text("Cut the brown string to release the ball!", 250, height-35, 250, 100); noStroke(); line(270, height-112.5, 350, height-112.5);
+    }
+    //LEGEND
+    if(menu_2){
+      fill(255);stroke(255);
+      rect(width-250, height-150, 250, 300);
+      stroke(0); fill(0); strokeWeight(2);
+      text("LEGEND", width-250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
+      text("Actual Ball:", width-250, height-225, 125, 50); stroke('black'); circle(width-250, height-200, 15);noStroke();
+      text("Traces & Predicted Trajectories of Ball: ", width-250, height-125, 250, 100); stroke('grey'); fill('grey'); circle(width-250, height-87.5, 15);noStroke();fill('black');
+      text("Cut the brown string to release the ball!", 250, height-35, 250, 100); noStroke(); line(270, height-112.5, 350, height-112.5);
+      omega_vec = createVector(0, 0, -omega);
+    }
+    else{
+      fill(255);stroke(255);
+      rect(width-250, height-275, 250, 50);
+      stroke(0); fill(0); strokeWeight(2);
+      text("LEGEND", width-250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
+    }
     drawCrosshair0();
   }
   theta-=omega;

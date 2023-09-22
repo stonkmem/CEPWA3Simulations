@@ -30,7 +30,7 @@ class CoriolisSeeder {
         strokeWeight(2);stroke(0);
 
         //DISPLAY APPPLIED VELOCITY
-        fill(100, 255, 100); stroke(100, 255, 100);
+        fill(150, 255, 150); stroke(100, 255, 100);
         push();
         applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), this.r.x, this.r.y);
         this.v = this.v.mult(7.5);
@@ -71,7 +71,6 @@ class CoriolisSeeder {
     }
 
     displayProjected() {
-
         push();
         applyMatrix(cos(this.freezeTheta), sin(this.freezeTheta), -sin(this.freezeTheta), cos(this.freezeTheta), width/2, height/2);
         strokeWeight(2);
@@ -82,19 +81,18 @@ class CoriolisSeeder {
         else{
             theta += omega;
         }
-        circle(this.s.x, this.s.y, 15);
+        circle(this.s.x, this.s.y, 15); //ACTUAL BALL
         stroke(125);
         pop();
         
         stroke(125);
         line(this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y, this.rot_prime(this.s).x, this.rot_prime(this.s).y);
 
-        fill(0, 0, 0); stroke(0, 0, 0);
+        fill(125); stroke(125);
         push();
         applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y);
+        
         line(0, 0, this.v_f.x, this.v_f.y);
-        applyMatrix(this.v_f_hat.x, this.v_f_hat.y, -this.v_f_hat.y, this.v_f_hat.x, this.v_f.x, this.v_f.y);
-        triangle(0,5,5*2,0,0,-1*5);
         pop();
 
         stroke(125);
@@ -102,7 +100,7 @@ class CoriolisSeeder {
 
         push();
         applyMatrix(cos(this.freezeTheta), sin(this.freezeTheta), -sin(this.freezeTheta), cos(this.freezeTheta), this.rot_freezeTheta(this.freezeLoc).x + width/2, this.rot_freezeTheta(this.freezeLoc).y + height/2);
-        stroke(0);
+        stroke(125);fill(125);
         line(0, 0, this.v_f.x, this.v_f.y);
         applyMatrix(this.v_f_hat.x, this.v_f_hat.y, -this.v_f_hat.y, this.v_f_hat.x, this.v_f.x, this.v_f.y);
         triangle(0,5,5*2,0,0,-1*5);
@@ -110,14 +108,14 @@ class CoriolisSeeder {
 
         push();
         applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), width/2, height/2);
-        stroke('gray');fill('gray');
+        stroke(200, 200, 200, 0.5);fill(200, 200, 200, 0.5);
         circle(this.s.x, this.s.y, 15);
         pop();
 
 
         if(dist(this.s.x, this.s.y, 0, 0)<height/2-110){
             if(frameCount%2===0){
-                pointArr.push(new pointSeed(width/2 + this.s.x * cos(this.freezeTheta) - this.s.y * sin(this.freezeTheta), height/2 + this.s.x * sin(this.freezeTheta) + this.s.y * cos(this.freezeTheta), theta, 'grey'));
+                pointArr.push(new pointSeed(width/2 + this.s.x * cos(this.freezeTheta) - this.s.y * sin(this.freezeTheta), height/2 + this.s.x * sin(this.freezeTheta) + this.s.y * cos(this.freezeTheta), theta, (200, 200, 200)));
             }
         }
         for (let i = 0; i < pointArr.length; i += 1) {
