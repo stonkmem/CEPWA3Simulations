@@ -157,7 +157,7 @@ function draw() {
     if(!menu_1){
       rect(250, height-275, 250, 50);
       stroke(0); fill(0); strokeWeight(2);
-      text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);
+      text("CLICK FOR LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);
     }
     else{
       rect(250, height-150, 250, 300);
