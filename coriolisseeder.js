@@ -118,6 +118,14 @@ class CoriolisSeeder {
                 pointArr.push(new pointSeed(width/2 + this.s.x * cos(this.freezeTheta) - this.s.y * sin(this.freezeTheta), height/2 + this.s.x * sin(this.freezeTheta) + this.s.y * cos(this.freezeTheta), theta, (200, 200, 200)));
             }
         }
+        else{
+            push();
+            applyMatrix(cos(this.freezeTheta), sin(this.freezeTheta), -sin(this.freezeTheta), cos(this.freezeTheta), width/2, height/2);
+            strokeWeight(2);
+            fill(0); stroke(0);
+            circle(this.s.x, this.s.y, 15); //ACTUAL BALL
+            pop();
+        }
         for (let i = 0; i < pointArr.length; i += 1) {
             pointArr[i].displayRot();
         }
