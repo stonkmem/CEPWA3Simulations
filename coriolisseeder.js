@@ -73,8 +73,8 @@ class CoriolisSeeder {
     displayProjected() {   
         stroke(125);
         this.s_copy = createVector(this.s.x, this.s.y);
-        this.s_copy.x+=15;
-        this.s_copy.y+=15;
+        // this.s_copy.x+=9;
+        // this.s_copy.y+=9;
         line(this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y, this.rot_prime(this.s_copy).x, this.rot_prime(this.s_copy).y);
 
         // fill(125); stroke(125);// push();// applyMatrix(cos(theta), sin(theta), -sin(theta), cos(theta), this.rot_prime(this.freezeLoc).x, this.rot_prime(this.freezeLoc).y);// line(0, 0, this.v_f.x, this.v_f.y);// pop();
@@ -98,9 +98,8 @@ class CoriolisSeeder {
 
 
         if(dist(this.s.x, this.s.y, 0, 0)<height/2-110){
-            if(frameCount%2===0){
+            if(true){
                 pointArr.push(new pointSeed(width/2 + this.s.x * cos(this.freezeTheta) - this.s.y * sin(this.freezeTheta), height/2 + this.s.x * sin(this.freezeTheta) + this.s.y * cos(this.freezeTheta), theta, (200, 200, 200)));
-                console.log('Ja');
             }
         }
         for (let i = 0; i < pointArr.length; i += 1) {

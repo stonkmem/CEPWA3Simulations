@@ -11,8 +11,9 @@ let menu_2
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight - 1);
+  console.log((height-200)/2);
   frameRate(60);
-  omegaSlider = createSlider(-500, 500, 0, 25);
+  omegaSlider = createSlider(-2, 2, 0, 0.1);
   omegaSlider.position(width / 2 - 150, 50);
   omegaSlider.size(300, AUTO);
   thetaSlider = createSlider(0, 360, 270, 15);
@@ -62,8 +63,8 @@ function mouseClicked() {
 }
 
 function setOmega() {
-  omega = omegaSlider.value() / 5000;
-  textAlign(CENTER); textSize(20); text('Angular velocity, ω: ' + omegaSlider.value() / 250 + 'π', width / 2, 50);
+  omega = omegaSlider.value()*PI/60;
+  textAlign(CENTER); textSize(20); text('Angular velocity, ω: ' + omegaSlider.value() + 'π', width / 2, 50);
 }
 
 function setTheta() {
