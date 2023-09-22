@@ -118,7 +118,7 @@ function draw() {
     if(!menu_1){
       rect(250, height-275, 250, 50);
       stroke(0); fill(0); strokeWeight(2);
-      text("LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);
+      text("CLICK FOR LEGEND", 250, height-275, 250, 50); noStroke();rectMode(CENTER);
     }
     else{
       rect(250, height-150, 250, 300);
@@ -182,7 +182,7 @@ function draw() {
       fill(255);stroke(255);
       rect(width-250, height-275, 250, 50);
       stroke(0); fill(0); strokeWeight(2);
-      text("LEGEND", width-250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
+      text("CLICK FOR LEGEND", width-250, height-275, 250, 50); noStroke();rectMode(CENTER);textSize(20);
     }
     drawCrosshair0();
   }
